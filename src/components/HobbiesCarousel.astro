@@ -127,7 +127,6 @@ const hobbies = [
 
   const slides = document.querySelectorAll('.snap-center');
   const indicators = document.querySelectorAll('[data-index]');
-  // Removed duplicate declaration of nextButton
   let currentIndex = 0;
 
   function updateSlide(index: number) {
@@ -166,7 +165,7 @@ const hobbies = [
   });
 
   // Auto play con pausa al hover
-  let autoplayInterval: number;
+  let autoplayInterval: ReturnType<typeof setInterval>;
 
   function startAutoplay() {
     autoplayInterval = setInterval(() => {
@@ -182,8 +181,8 @@ const hobbies = [
   // Iniciar autoplay
   startAutoplay();
 
-  // Pausar autoplay al hover
-  const carouselContainer = document.querySelector('.relative'); 
+  // Pausar autoplay al hover - use a more specific selector
+  const carouselContainer = document.querySelector('.overflow-hidden.rounded-2xl');
   carouselContainer?.addEventListener('mouseenter', stopAutoplay);
   carouselContainer?.addEventListener('mouseleave', startAutoplay);
 
@@ -194,10 +193,12 @@ const hobbies = [
   images.forEach((img) => {
     img.addEventListener('click', () => {
       if (lightbox && lightboxImage) {
+        // Set the image source and alt text
         (lightboxImage as HTMLImageElement).src = (img as HTMLImageElement).src;
-        lightboxImage.alt = (img as HTMLImageElement).alt || '';
+        (lightboxImage as HTMLImageElement).alt = (img as HTMLImageElement).alt;
+
+        // Show lightbox
         lightbox.classList.remove('hidden');
-        // Add small delay to trigger animation
         requestAnimationFrame(() => {
           lightbox.classList.add('flex');
           lightbox.classList.add('opacity-100');
