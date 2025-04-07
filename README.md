@@ -1,27 +1,26 @@
-# 👨🏻‍💻 Porfolio para programadores y desarrolladores
+# Personal Portfolio Website
 
-<div align="center">
-<a href="https://porfolio.dev/">
-<img src="./public/porfolio.webp">
-</a>
-<p></p>
-</div>
+A modern and responsive portfolio website built with Astro and Tailwind CSS, showcasing my projects and professional experience as a Full Stack Developer.
 
-<div align="center">
+## 🚀 Tech Stack
 
-![Astro Badge](https://img.shields.io/badge/Astro-FF3E00?logo=astro&logoColor=fff&style=flat)
-![Tailwind CSS Badge](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=flat)
-![GitHub stars](https://img.shields.io/github/stars/midudev/porfolio.dev)
-![GitHub PRs](https://img.shields.io/github/issues-pr/midudev/porfolio.dev)
-![GitHub forks](https://img.shields.io/github/forks/midudev/porfolio.dev)
-![GitHub issues](https://img.shields.io/github/issues/midudev/porfolio.dev)
+- [Astro](https://astro.build/) - Web Framework
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [TypeScript](https://www.typescriptlang.org/) - Type Safety
+- [Fontsource](https://fontsource.org/) - Web Fonts
+- [Swiper](https://swiperjs.com/) - Touch Slider
 
-</div>
+## ✨ Features
 
-## 🫂 Contribuidores
+- 🌙 Dark/Light mode
+- 📱 Fully Responsive Design
+- 🎨 Modern UI with Tailwind CSS
+- ⚡ Fast Performance with Astro
+- 🔍 SEO Optimized
+- 🤖 Robots.txt Support
 
-<a href="https://github.com/midudev/porfolio.dev/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=midudev/porfolio.dev" />
-</a>
+## 🛠️ Setup & Development
 
-<p></p>
+1. Clone the repository:
+```bash
+git clone https://github.com/ManuelSG117/Prueba.git
