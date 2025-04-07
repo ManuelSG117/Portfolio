@@ -8,6 +8,10 @@ import API from "./icons/API.astro";
 import MySQL from "./icons/MySQL.astro";
 import ProjectModal from "./ProjectModal.astro";
 
+// Add view toggle icons
+import GridIcon from "./icons/Grid.astro";
+import ListIcon from "./icons/List.astro";
+
 const TAGS = {
  FIREBASE: {
     name: "Firebase",
@@ -110,7 +114,28 @@ const PROJECTS = [
 ];
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-4 auto-rows-[18rem] gap-4 p-4 max-w-[1400px] mx-auto">
+<!-- Add view toggle controls -->
+<div class="flex justify-end items-center gap-2 mb-4 max-w-[1400px] mx-auto px-4">
+  <span class="text-sm text-gray-600 dark:text-gray-400">Vista:</span>
+  <div class="flex bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
+    <button 
+      id="bento-view" 
+      class="flex items-center justify-center p-2 rounded-md text-yellow-500 bg-white dark:bg-gray-700 shadow-sm"
+      aria-label="Vista Bento"
+    >
+      <GridIcon class="size-5" />
+    </button>
+    <button 
+      id="list-view" 
+      class="flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-yellow-500 dark:hover:text-yellow-500"
+      aria-label="Vista Lista"
+    >
+      <ListIcon class="size-5" />
+    </button>
+  </div>
+</div>
+
+<div id="projects-container" class="grid grid-cols-1 md:grid-cols-4 auto-rows-[18rem] gap-4 p-4 max-w-[1400px] mx-auto">
   {
     PROJECTS.map(({ image, title, subtitle, description, tags, link }, index) => (
       <>
@@ -127,8 +152,7 @@ const PROJECTS = [
           backdrop-blur-sm
           border border-black/10 dark:border-white/10
           hover:border-yellow-500/50 transition-all duration-500 
-          hover:shadow-lg hover:shadow-yellow-500/50           dark:hover:shadow-lg dark:hover:shadow-yellow-500/20
-
+          hover:shadow-lg hover:shadow-yellow-500/50 dark:hover:shadow-lg dark:hover:shadow-yellow-500/20
           hover:-translate-y-1
         `}>
           {/* Modern gradient overlay */}
@@ -166,23 +190,21 @@ const PROJECTS = [
 
             {/* Tags */}
             <div class="flex flex-wrap gap-2 mb-4 translate-y-8 
-              group-hover:translate-y-0 transition-transform duration-300">
-              {tags
-                .slice(0, index === 3 || index === 5 ? 1 : tags.length) // Limitar a 1 tag solo en cards 1x1
-                .map((tag) => (
-                  <span class="inline-flex items-center px-2 py-1 
-                    text-[10px] rounded-full bg-white/10 
-                    text-white/80 backdrop-blur-sm 
-                    border border-white/10">
-                    <tag.icon class="size-3 mr-1" />
-                    {tag.name}
-                  </span>
-                ))}
+              group-hover:translate-y-0 transition-transform duration-300 tags-container">
+              {tags.map((tag, tagIndex) => (
+                <span class={`inline-flex items-center px-2 py-1 
+                  text-[10px] rounded-full bg-white/10 
+                  text-white/80 backdrop-blur-sm 
+                  border border-white/10 tag ${(index === 3 || index === 5) && tagIndex > 0 ? 'hidden' : ''}`}>
+                  <tag.icon class="size-3 mr-1" />
+                  {tag.name}
+                </span>
+              ))}
               {(index === 3 || index === 5) && tags.length > 1 && (
                 <span class="inline-flex items-center px-2 py-1 
                   text-[10px] rounded-full bg-white/10 
                   text-white/80 backdrop-blur-sm 
-                  border border-white/10">
+                  border border-white/10 plus-tag">
                   +{tags.length - 1}
                 </span>
               )}
@@ -325,6 +347,161 @@ const PROJECTS = [
     }, 300);
   };
 
+  // View toggle functionality
+  const isMobileDevice = () => {
+    return window.innerWidth < 768;
+  };
+
+  const showMobileMessage = () => {
+    // Check if message already exists
+    if (document.getElementById('mobile-view-message')) return;
+    
+    const messageEl = document.createElement('div');
+    messageEl.id = 'mobile-view-message';
+    messageEl.className = 'fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-6';
+    messageEl.innerHTML = `
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-md shadow-xl">
+        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">Mejor experiencia en dispositivos más grandes</h3>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          Para mejorar tu experiencia con la visualización de los proyectos, te recomiendo usar un dispositivo con pantalla más grande como una laptop o tablet.
+        </p>
+        <button id="close-mobile-message" class="w-full py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors">
+          Entendido
+        </button>
+      </div>
+    `;
+    
+    document.body.appendChild(messageEl);
+    document.body.style.overflow = 'hidden';
+    
+    document.getElementById('close-mobile-message')?.addEventListener('click', () => {
+      document.body.removeChild(messageEl);
+      document.body.style.overflow = 'auto';
+    });
+  };
+
+  const updateTagsVisibility = (isListView: boolean) => {
+    // In list view, show all tags for all projects
+    document.querySelectorAll('#projects-container article').forEach((article, index) => {
+      const tagsContainer = article.querySelector('.tags-container');
+      if (!tagsContainer) return;
+      
+      const allTags = tagsContainer.querySelectorAll('.tag');
+      const plusTag = tagsContainer.querySelector('.plus-tag');
+      
+      if (isListView) {
+        // Show all tags in list view
+        allTags.forEach(tag => tag.classList.remove('hidden'));
+        if (plusTag) plusTag.classList.add('hidden');
+      } else {
+        // In bento view, limit tags for small cards
+        if (index === 3 || index === 5) {
+          // For small cards, show only first tag
+          Array.from(allTags).slice(1).forEach(tag => tag.classList.add('hidden'));
+          if (plusTag) plusTag.classList.remove('hidden');
+        } else {
+          // For larger cards, show all tags
+          allTags.forEach(tag => tag.classList.remove('hidden'));
+          if (plusTag) plusTag.classList.add('hidden');
+        }
+      }
+    });
+  };
+
+  const switchToBentoView = () => {
+    // Show message on mobile
+    if (isMobileDevice()) {
+      showMobileMessage();
+      return;
+    }
+    
+    const projectsContainer = document.getElementById('projects-container');
+    const bentoViewBtn = document.getElementById('bento-view');
+    const listViewBtn = document.getElementById('list-view');
+    
+    // Update container classes
+    projectsContainer?.classList.remove('list-view');
+    projectsContainer?.classList.add('grid-cols-1', 'md:grid-cols-4', 'auto-rows-[18rem]');
+    projectsContainer?.classList.remove('md:grid-cols-1', 'auto-rows-auto', 'gap-8');
+    
+    // Update active button styles
+    bentoViewBtn?.classList.add('bg-white', 'dark:bg-gray-700', 'text-yellow-500', 'shadow-sm');
+    bentoViewBtn?.classList.remove('text-gray-500', 'dark:text-gray-400');
+    
+    listViewBtn?.classList.remove('bg-white', 'dark:bg-gray-700', 'text-yellow-500', 'shadow-sm');
+    listViewBtn?.classList.add('text-gray-500', 'dark:text-gray-400');
+    
+    // Reset article classes for bento layout
+    document.querySelectorAll('#projects-container article').forEach((article, index) => {
+      const articleEl = article as HTMLElement;
+      
+      // Remove list-specific classes
+      articleEl.classList.remove('md:h-[20rem]');
+      
+      // Apply bento-specific classes based on index
+      if (index === 0) {
+        articleEl.classList.add('md:col-span-2', 'md:row-span-2');
+      } else if (index === 1 || index === 2) {
+        articleEl.classList.add('md:col-span-2', 'md:row-span-1');
+      } else if (index === 3 || index === 5) {
+        articleEl.classList.add('md:col-span-1', 'md:row-span-1');
+      } else if (index === 4) {
+        articleEl.classList.add('md:col-span-2', 'md:row-span-1');
+      }
+    });
+    
+    // Update tags visibility
+    updateTagsVisibility(false);
+    
+    // Save preference
+    localStorage.setItem('projectViewPreference', 'bento');
+  };
+  
+  const switchToListView = () => {
+    // Show message on mobile
+    if (isMobileDevice()) {
+      showMobileMessage();
+      return;
+    }
+    
+    const projectsContainer = document.getElementById('projects-container');
+    const bentoViewBtn = document.getElementById('bento-view');
+    const listViewBtn = document.getElementById('list-view');
+    
+    // Update container classes
+    projectsContainer?.classList.add('list-view');
+    projectsContainer?.classList.remove('md:grid-cols-4', 'auto-rows-[18rem]');
+    projectsContainer?.classList.add('md:grid-cols-1', 'auto-rows-auto', 'gap-8');
+    
+    // Update active button styles
+    listViewBtn?.classList.add('bg-white', 'dark:bg-gray-700', 'text-yellow-500', 'shadow-sm');
+    listViewBtn?.classList.remove('text-gray-500', 'dark:text-gray-400');
+    
+    bentoViewBtn?.classList.remove('bg-white', 'dark:bg-gray-700', 'text-yellow-500', 'shadow-sm');
+    bentoViewBtn?.classList.add('text-gray-500', 'dark:text-gray-400');
+    
+    // Reset article classes for list layout
+    document.querySelectorAll('#projects-container article').forEach((article) => {
+      const articleEl = article as HTMLElement;
+      
+      // Remove bento-specific classes
+      articleEl.classList.remove(
+        'md:col-span-2', 'md:row-span-2',
+        'md:col-span-2', 'md:row-span-1',
+        'md:col-span-1', 'md:row-span-1'
+      );
+      
+      // Add list-specific classes
+      articleEl.classList.add('md:h-[20rem]');
+    });
+    
+    // Update tags visibility
+    updateTagsVisibility(true);
+    
+    // Save preference
+    localStorage.setItem('projectViewPreference', 'list');
+  };
+
   // Manejadores de eventos
   document.addEventListener('DOMContentLoaded', () => {
     // Abrir modal
@@ -365,5 +542,35 @@ const PROJECTS = [
         }
       });
     });
+
+    // Add click event listeners to view toggle buttons
+    const bentoViewBtn = document.getElementById('bento-view');
+    const listViewBtn = document.getElementById('list-view');
+    
+    bentoViewBtn?.addEventListener('click', switchToBentoView);
+    listViewBtn?.addEventListener('click', switchToListView);
+    
+    // Load saved preference or default to bento
+    const savedViewPreference = localStorage.getItem('projectViewPreference');
+    if (savedViewPreference === 'list') {
+      switchToListView();
+    } else {
+      switchToBentoView();
+    }
   });
 </script>
+
+<style>
+  /* Additional styles for list view */
+  .list-view article {
+    height: auto !important;
+    min-height: 20rem;
+  }
+  
+  @media (min-width: 768px) {
+    .list-view article {
+      grid-column: 1 / -1 !important;
+      grid-row: auto !important;
+    }
+  }
+</style>
