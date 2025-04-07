@@ -20,7 +20,3 @@ A modern and responsive portfolio website built with Astro and Tailwind CSS, sho
 - 🤖 Robots.txt Support
 
 ## 🛠️ Setup & Development
-
-1. Clone the repository:
-```bash
-git clone https://github.com/ManuelSG117/Prueba.git
