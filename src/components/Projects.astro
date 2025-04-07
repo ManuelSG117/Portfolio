@@ -1,93 +1,370 @@
 ---
-import GitHub from "./icons/GitHub.astro"
-import NextJS from "./icons/NextJS.astro"
-import Tailwind from "./icons/Tailwind.astro"
-import Link from "./icons/Link.astro"
-import LinkButton from "./LinkButton.astro"
+import GitHub from "./icons/GitHub.astro";
+import Firebase from "./icons/Firebase.astro";
+import PHP from "./icons/Php.astro";
+import Link from "./icons/Link.astro";
+import LinkButton from "./LinkButton.astro";
+import Kotlin from "./icons/Kotlin.astro";
+import API from "./icons/API.astro";
+import MySQL from "./icons/MySQL.astro";
+import ProjectModal from "./ProjectModal.astro";
 
 const TAGS = {
-  NEXT: {
-    name: "Next.js",
-    class: "bg-black text-white",
-    icon: NextJS,
+ FIREBASE: {
+    name: "Firebase",
+    class: "bg-gradient-to-br from-orange-200 to-orange-300 text-orange-800 border border-orange-300 dark:from-orange-900/80 dark:to-orange-700/80 dark:text-orange-300 dark:border-orange-700",
+    icon: Firebase,
   },
-  TAILWIND: {
-    name: "Tailwind CSS",
-    class: "bg-[#003159] text-white",
-    icon: Tailwind,
+  PHP: {
+    name: "PHP",
+    class: "bg-gradient-to-br from-indigo-200 to-indigo-300 text-indigo-800 border border-indigo-300 dark:from-indigo-900/80 dark:to-indigo-700/80 dark:text-indigo-300 dark:border-indigo-700",
+    icon: PHP,
   },
-}
+  KOTLIN: {
+    name: "Kotlin",
+    class: "bg-gradient-to-br from-purple-200 to-purple-300 text-purple-800 border border-purple-300 dark:from-purple-900/80 dark:to-purple-700/80 dark:text-purple-300 dark:border-purple-700",
+    icon: Kotlin,
+  },
+  REST_API: {
+    name: "REST API",
+    class: "bg-gradient-to-br from-sky-200 to-sky-300 text-sky-800 border border-sky-300 dark:from-sky-900/80 dark:to-sky-700/80 dark:text-sky-300 dark:border-sky-700",
+    icon: API,
+  },
+  SQL: {
+    name: "MySQL",
+    class: "bg-gradient-to-br from-blue-200 to-blue-300 text-blue-800 border border-blue-300 dark:from-blue-900/80 dark:to-blue-700/80 dark:text-blue-300 dark:border-blue-700",
+    icon: MySQL,
+  },
+};
+
 const PROJECTS = [
   {
-    title: "SVGL - A beautiful library with SVG logos",
+    title: "CAPASU",
+    subtitle: "Contribuí al desarrollo backend  de la aplicación Capasu, siendo esta la primera aplicación de pagos del servicio de agua del estado de Michoacán, añadiendo ingresos en un 10%, con +1k de descargas.",
     description:
-      "Biblioteca de logos SVG de las marcas más populares. +10k visitas al mes. +2K svgs descargados. Creado desde cero con Next.js, React y Tailwind CSS.",
-    link: "https://svgl.vercel.app/",
-    github: "https://github.com/pheralb/svgl",
-    image: "/projects/svgl.webp",
-    tags: [TAGS.NEXT, TAGS.TAILWIND],
+      " Diseño e implementación de API RESTful con PHP para gestión de usuarios" +
+      " Contribuí en la integración de pasarela de pagos segura y sistema de notificaciones en tiempo real" +
+      " Desarrollo de de Webservices para el procesamiento de reportes " +
+      " Apoyo en la implementación de crashlitycs, remote config, analitycs, release monitoring, etc. " +
+      "  Optimización de base de datos para mejorar rendimiento y escalabilidad"+
+      " Contribución en el desarrollo de la UI y UX de la aplicación móvil",
+
+    link: "https://play.google.com/store/apps/details?id=com.sistemas.capasupay",
+    image: "/projects/capasu.png",
+    tags: [TAGS.PHP ,TAGS.KOTLIN, TAGS.FIREBASE],
+  },
+
+  {
+    title: "Sistema de reportes de Capasu",
+    subtitle: "Diseñé e implementé  de principio a fin una plataforma web  unificada de atención para los diferentes reportes de la ciudadanía para acelerar la solución del reporte en un 40%  mejorando el tiempo de respuesta y ahorrar costos operativos en un 20%",
+    description:
+      "Rediseñe e implemente de principio a fin, el desarrollo de backend y front-end." +
+      "Fuí el principal creador de webservices y Api/REST para gestión reportes para el uso de la aplicación móvil unificandola con el sistema web." +
+      "Contribuí a estrategias para  para acelerar la solución del reporte en un 40%  mejorando el tiempo de respuesta y ahorrar costos operativos en un 20%. " +
+      "Lídere el rediseño de reportes para el atlas de riesgo del municipio logrando con el equipo operativo mapear los reportes del ultimo año." ,
+    link: "https://www.canva.com/design/DAGfAHwmWwg/Oe3Iv36WUCoo6DpGMgJF4w/edit",
+    image: "/projects/Comercial.png",
+    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL],
   },
   {
-    title: "AdventJS - Retos de programación con JavaScript y TypeScript",
+    title: "App Servicio Medido",
+    subtitile: "Aplicación móvil para gestión procesos de servicios operativos de Capasu",
     description:
-      "Plataforma gratuita con retos de programación. Más de 1 millón de visitas en un mes. +50K retos completados. Creada desde cero con Next.js, React y Tailwind CSS.",
-    link: "https://adventjs.dev",
-    image: "/projects/adventjs.webp",
-    tags: [TAGS.NEXT, TAGS.TAILWIND],
+      " Lideré la construcción un webservices para gestión de lecturas, reportes y servicios." +
+      "Fuí el responsable de tomar estrategias para reducir errores de toma de datos y tiempos de entrega en más de un 40%." +
+      " Diseñé la base de datos optimizada para grandes volúmenes de datos operativos." +
+      " XML y JSON para la comunicación entre dispositivos y servidores." ,
+    link: "https://www.canva.com/design/DAGfAHwmWwg/Oe3Iv36WUCoo6DpGMgJF4w/edit",
+    image: "/projects/Comercial.png",
+    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL],
   },
-]
+  {
+    title: "Flota Capasu",
+    subtitle: "Sistema web para gestión de flota vehicular de Capasu",
+    description:
+    "Fuí responsable del diseño, desarollo y analisis del sistema web, diseño de base de datos y experiencia de usuario." +
+    " Desarrolle reportes los cuales ayudaron al encargado de las flotas a reducir costos operativos en al menos un 10%. " ,      
+    image: "/projects/Comercial.png",
+    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL],
+  },
+  {
+    title: "Sistema de Lecturas de Capasu",
+    subtitle:"Sistema de Mapeo de lecturas, toma de datos y control de lecturistas",
+    description:
+      "Fuí el responsable del diseño, desarollo y analisis del sistema web, diseño de base de datos y experiencia de usuario." +
+      "Lideré el desarrollo de estrategias para reducir tiempo en la toma de datos en un 15%.  " +
+      "Desarrolle en la integración de mapas para la visualización de los medidores y su ubicación." ,
+    image: "/projects/Comercial.png",
+    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL],
+  },
+  {
+    title: "Ingresos Capasu",
+    subtitle: "Aplicación para visualización de ingresos de Capasu",
+    description:
+    "Colabore en el desarrollo de Webservices para la integración de datos de ingresos." +
+    "Participe en el desarrollo de la ui y ux de la aplicación." +
+    "Aporte en la creación del paquete de la aplicación en AppleDeveloper." ,
+    image: "/projects/Comercial.png",
+    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL],
+  }
+
+];
 ---
 
-<div class="flex flex-col gap-y-16">
+<div class="grid grid-cols-1 md:grid-cols-4 auto-rows-[18rem] gap-4 p-4 max-w-[1400px] mx-auto">
   {
-    PROJECTS.map(({ image, title, description, tags, link, github }) => (
-    <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
-  <div class="w-full md:w-1/2">
-    <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
-      <img alt="Recién llegado vs 5 años en Nueva Zelanda" class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105" loading="lazy" src={image} />
-    </div>
-  </div>
+    PROJECTS.map(({ image, title, subtitle, description, tags, link }, index) => (
+      <>
+        <article class={`
+          relative group 
+          ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''} 
+          ${index === 1 ? 'md:col-span-2 md:row-span-1' : ''}
+          ${index === 2 ? 'md:col-span-2 md:row-span-1' : ''}
+          ${index === 3 ? 'md:col-span-1 md:row-span-1' : ''}
+          ${index === 4 ? 'md:col-span-2 md:row-span-1' : ''}
+          ${index === 5 ? 'md:col-span-1 md:row-span-1' : ''}
+          rounded-3xl overflow-hidden
+          bg-gradient-to-br from-black/60 to-black/90 dark:from-white/5 dark:to-white/20
+          backdrop-blur-sm
+          border border-black/10 dark:border-white/10
+          hover:border-yellow-500/50 transition-all duration-500 
+          hover:shadow-lg hover:shadow-yellow-500/50           dark:hover:shadow-lg dark:hover:shadow-yellow-500/20
 
-  <div class="w-full md:w-1/2 md:max-w-lg">
-    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
-      {title}
-    </h3>
-    <div class="flex flex-wrap mt-2">
-      <ul class="flex flex-row mb-2 gap-x-2">
-          {tags.map((tag) => (
-            <li>
-              <span
-                class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
-              >
-                <tag.icon class="size-4" />
-                {tag.name}
-              </span>
-            </li>
-          ))}
-        </ul>
+          hover:-translate-y-1
+        `}>
+          {/* Modern gradient overlay */}
+          <div class="absolute inset-0 bg-gradient-to-b 
+            from-transparent via-black/20 to-black/60 
+            group-hover:via-black/40 group-hover:to-black/80 
+            transition-colors duration-500 z-10"/>
+          
+          {/* Background image */}
+          <div class="absolute inset-0 z-0">
+            <img
+              alt={title}
+              class="w-full h-full object-cover scale-105 
+                group-hover:scale-110 transition-transform duration-700 ease-out
+                opacity-60 group-hover:opacity-40 group-hover:blur-sm"
+              decoding="async"
+              src={image}
+            />
+          </div>
 
-      <div class="mt-2 text-gray-700 dark:text-gray-400">{description}</div>
-      <footer class="flex items-end justify-start mt-4 gap-x-4">
-          {github && (
-            <LinkButton href={github}>
-              <GitHub class="size-6" />
-              Code
+          {/* Content container */}
+          <div class="relative h-full flex flex-col justify-end p-6 z-20">
+            <h3 class="text-lg md:text-xl font-bold text-white mb-2 
+              tracking-tight translate-y-8 group-hover:translate-y-0 
+              transition-transform duration-300">
+              {title}
+            </h3>
+
+            <p class="text-sm text-gray-300 mb-4 opacity-0 
+              group-hover:opacity-100 translate-y-8 
+              group-hover:translate-y-0 transition-all 
+              duration-300 line-clamp-2">
+              {subtitle}
+            </p>
+
+            {/* Tags */}
+            <div class="flex flex-wrap gap-2 mb-4 translate-y-8 
+              group-hover:translate-y-0 transition-transform duration-300">
+              {tags
+                .slice(0, index === 3 || index === 5 ? 1 : tags.length) // Limitar a 1 tag solo en cards 1x1
+                .map((tag) => (
+                  <span class="inline-flex items-center px-2 py-1 
+                    text-[10px] rounded-full bg-white/10 
+                    text-white/80 backdrop-blur-sm 
+                    border border-white/10">
+                    <tag.icon class="size-3 mr-1" />
+                    {tag.name}
+                  </span>
+                ))}
+              {(index === 3 || index === 5) && tags.length > 1 && (
+                <span class="inline-flex items-center px-2 py-1 
+                  text-[10px] rounded-full bg-white/10 
+                  text-white/80 backdrop-blur-sm 
+                  border border-white/10">
+                  +{tags.length - 1}
+                </span>
+              )}
+            </div>
+
+            {/* Actions */}
+            <div class="flex gap-2 opacity-0 group-hover:opacity-100 
+              translate-y-8 group-hover:translate-y-0 
+              transition-all duration-300">
+              {link && (
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener"
+                  class="px-3 py-1.5 text-xs rounded-full
+                    bg-yellow-500/10 backdrop-blur-sm
+                    border border-yellow-500/20 text-yellow-500
+                    hover:bg-yellow-500/20 transition-colors duration-300"
+                >
+                  <Link class="size-3 inline-block mr-1" />
+                  Demo
+                </a>
+              )}
               
-            </LinkButton>
-          )}
-          {link && (
-            <LinkButton href={link}>
-              <Link class="size-4" />
-              Preview
-            </LinkButton>
-          )}
-        </footer>
-    </div>
-  </div>
-</article>
+              <button 
+                class="px-3 py-1.5 text-xs rounded-full
+                  bg-white/10 backdrop-blur-sm
+                  border border-white/10 text-white
+                  hover:bg-white/20 transition-colors duration-300"
+                data-modal-target={`modal-${index}`}
+              >
+                Ver más
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <ProjectModal id={`modal-${index}`}>
+          <div class="grid gap-6 relative">
+         
+            <h3 class="text-2xl font-bold   text-gray-700   dark:text-white/90 break-words">
+              {title}
+            </h3>
+
+            <div class="space-y-4">
+              {description.split("•").map((item) => {
+                if (!item.trim()) return null;
+                return (
+                  <div class="flex items-start gap-3">
+                    <span class="flex-shrink-0 p-1 bg-yellow-500/10 rounded-full mt-1">
+                      <div class="w-2 h-2 rounded-full bg-yellow-500/80" />
+                    </span>
+                    <p class="text-sm  text-gray-500 dark:text-gray-300">
+                      {item.trim()}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+               {/* Image container with gradient overlay */}
+               <div class="relative rounded-xl overflow-hidden group">
+              <div class="absolute inset-0 bg-gradient-to-b 
+                from-transparent via-black/20 to-black/60 
+                group-hover:via-black/40 group-hover:to-black/80
+                transition-colors duration-500 z-10"/>
+              <img
+                src={image}
+                alt={title}
+                class="w-full h-64 object-cover
+                  scale-100 group-hover:scale-110
+                  opacity-100 group-hover:opacity-90
+                  transition-all duration-700 ease-out"
+              />
+            </div>
+            
+            
+            {/* Footer with tags and demo button */}
+            <footer class="flex items-center justify-between pt-6 ">
+              {/* Tags section */}
+              <div class="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <span class="inline-flex items-center px-2 py-1 
+                    text-xs rounded-full bg-black/15 dark:bg-white/10 
+                    backdrop-blur-sm border border-black/10 dark:border-white/10
+                    text-gray-600 dark:text-gray-200">
+                    <tag.icon class="size-3 mr-1" />
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+
+              {/* Demo button */}
+              {link && (
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener"
+                  class="px-3 py-1.5 text-xs rounded-full
+                    bg-yellow-500/20 backdrop-blur-sm
+                    border border-yellow-500/30 text-yellow-500
+                    hover:bg-yellow-500/40 transition-colors duration-300
+                    inline-flex items-center gap-2"
+                >
+                  <Link class="size-3" />
+                  <span>Demo</span>
+                </a>
+              )}
+            </footer>
+          </div>
+        </ProjectModal>
+      </>
     ))
   }
 </div>
 
+<script>
+  const handleModalOpen = (modal: HTMLDialogElement) => {
+    // Bloquear scroll
+    document.body.style.overflow = 'hidden';
+    
+    modal.classList.add('opacity-0', 'scale-95');
+    modal.showModal();
+    
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        modal.classList.remove('opacity-0', 'scale-95');
+      });
+    });
+  };
 
+  const handleModalClose = (modal: HTMLDialogElement) => {
+    // Restaurar scroll
+    document.body.style.overflow = 'auto';
+    
+    modal.classList.add('opacity-0', 'scale-95');
+    
+    setTimeout(() => {
+      modal.close();
+      modal.classList.remove('opacity-0', 'scale-95');
+    }, 300);
+  };
 
+  // Manejadores de eventos
+  document.addEventListener('DOMContentLoaded', () => {
+    // Abrir modal
+    document.querySelectorAll('[data-modal-target]').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const modalId = (e.currentTarget as HTMLElement).getAttribute('data-modal-target');
+        const modal = document.getElementById(modalId!) as HTMLDialogElement;
+        if (modal) handleModalOpen(modal);
+      });
+    });
+
+    // Cerrar modal con botón X
+    document.querySelectorAll('[data-close-modal]').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const modal = (e.target as HTMLElement).closest('dialog') as HTMLDialogElement;
+        if (modal) handleModalClose(modal);
+      });
+    });
+
+    // Cerrar modal con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const openModal = document.querySelector('dialog[open]') as HTMLDialogElement;
+        if (openModal) {
+          e.preventDefault(); // Prevenir el cierre por defecto
+          handleModalClose(openModal);
+        }
+      }
+    });
+
+    // Cerrar al hacer clic fuera del modal
+    document.querySelectorAll('dialog').forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          e.preventDefault();
+          handleModalClose(modal as HTMLDialogElement);
+        }
+      });
+    });
+  });
+</script>
