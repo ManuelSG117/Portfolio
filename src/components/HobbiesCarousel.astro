@@ -108,13 +108,50 @@ const hobbies = [
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
-    <div class="relative aspect-video w-full flex items-center justify-center">
+    
+    <!-- Botones de navegación del lightbox -->
+    <button 
+      id="lightboxPrevButton"
+      class="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 hover:bg-black/75 transition-colors backdrop-blur-sm group z-10"
+      aria-label="Imagen anterior"
+    >
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        class="h-8 w-8 text-white group-hover:scale-110 transition-transform" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+    <button 
+      id="lightboxNextButton"
+      class="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 hover:bg-black/75 transition-colors backdrop-blur-sm group z-10"
+      aria-label="Siguiente imagen"
+    >
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        class="h-8 w-8 text-white group-hover:scale-110 transition-transform" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+    
+    <div class="relative aspect-video w-full flex flex-col items-center justify-center">
       <img 
         id="lightboxImage" 
         src="" 
         alt="" 
-        class="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl transform scale-95 transition-all duration-300"
+        class="max-h-[80vh] max-w-[90vw] object-contain rounded-lg shadow-2xl transform scale-95 transition-all duration-300"
       >
+      <div class="mt-4 text-center text-white">
+        <h2 id="lightboxTitle" class="text-2xl font-bold mb-2"></h2>
+        <p id="lightboxDescription" class="text-lg"></p>
+      </div>
     </div>
   </div>
 </div>
@@ -122,6 +159,8 @@ const hobbies = [
 <script>
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightboxImage');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxDescription = document.getElementById('lightboxDescription');
   const closeLightbox = document.getElementById('closeLightbox');
   const images = document.querySelectorAll('.group img');
 
@@ -164,38 +203,61 @@ const hobbies = [
     updateSlide(nextIndex);
   });
 
-  // Auto play con pausa al hover
-  let autoplayInterval: ReturnType<typeof setInterval>;
-
-  function startAutoplay() {
-    autoplayInterval = setInterval(() => {
-      const nextIndex = (currentIndex + 1) % slides.length;
-      updateSlide(nextIndex);
-    }, 4000);
-  }
-
-  function stopAutoplay() {
-    clearInterval(autoplayInterval);
-  }
-
-  // Iniciar autoplay
-  startAutoplay();
-
-  // Pausar autoplay al hover - use a more specific selector
-  const carouselContainer = document.querySelector('.overflow-hidden.rounded-2xl');
-  carouselContainer?.addEventListener('mouseenter', stopAutoplay);
-  carouselContainer?.addEventListener('mouseleave', startAutoplay);
 
   // Inicializar el primer indicador
   updateIndicators(0);
 
+  // Add lightbox navigation buttons
+  const lightboxPrevButton = document.getElementById('lightboxPrevButton');
+  const lightboxNextButton = document.getElementById('lightboxNextButton');
+  let currentLightboxIndex = 0;
+
+  // Function to update lightbox content
+  function updateLightboxContent(index: number) {
+    if (lightboxImage && lightboxTitle && lightboxDescription) {
+      currentLightboxIndex = index;
+      
+      // Get the hobby data for this index
+      const container = slides[index].querySelector('.group');
+      const img = container?.querySelector('img');
+      const titleElement = container?.querySelector('h3');
+      
+      if (img) {
+        // Update image
+        (lightboxImage as HTMLImageElement).src = (img as HTMLImageElement).src;
+        (lightboxImage as HTMLImageElement).alt = (img as HTMLImageElement).alt;
+        
+        // Update title and description
+        lightboxTitle.textContent = titleElement ? titleElement.textContent : '';
+        lightboxDescription.textContent = (img as HTMLImageElement).alt || '';
+      }
+    }
+  }
+
   // Add click event to all images
-  images.forEach((img) => {
+  images.forEach((img, index) => {
     img.addEventListener('click', () => {
-      if (lightbox && lightboxImage) {
+      if (lightbox && lightboxImage && lightboxTitle && lightboxDescription) {
+        // Get the parent container to access the title
+        const container = img.closest('.group');
+        const titleElement = container?.querySelector('h3');
+        const title = titleElement ? titleElement.textContent : '';
+        
         // Set the image source and alt text
         (lightboxImage as HTMLImageElement).src = (img as HTMLImageElement).src;
         (lightboxImage as HTMLImageElement).alt = (img as HTMLImageElement).alt;
+        
+        // Set the title and description
+        lightboxTitle.textContent = title || '';
+        lightboxDescription.textContent = (img as HTMLImageElement).alt || '';
+        
+        // Store current index
+        const slideContainer = img.closest('.snap-center');
+        const slideIndex = Array.from(slides).indexOf(slideContainer as Element);
+        currentLightboxIndex = slideIndex >= 0 ? slideIndex : 0;
+
+        // Disable scrolling on body
+        document.body.style.overflow = 'hidden';
 
         // Show lightbox
         lightbox.classList.remove('hidden');
@@ -204,9 +266,34 @@ const hobbies = [
           lightbox.classList.add('opacity-100');
           lightboxImage.classList.remove('scale-95');
         });
-        stopAutoplay();
       }
     });
+  });
+
+  // Lightbox navigation
+  lightboxPrevButton?.addEventListener('click', () => {
+    const prevIndex = (currentLightboxIndex - 1 + slides.length) % slides.length;
+    updateLightboxContent(prevIndex);
+  });
+
+  lightboxNextButton?.addEventListener('click', () => {
+    const nextIndex = (currentLightboxIndex + 1) % slides.length;
+    updateLightboxContent(nextIndex);
+  });
+
+  // Add keyboard navigation for lightbox
+  document.addEventListener('keydown', (e) => {
+    if (lightbox?.classList.contains('flex')) {
+      if (e.key === 'ArrowLeft') {
+        const prevIndex = (currentLightboxIndex - 1 + slides.length) % slides.length;
+        updateLightboxContent(prevIndex);
+      } else if (e.key === 'ArrowRight') {
+        const nextIndex = (currentLightboxIndex + 1) % slides.length;
+        updateLightboxContent(nextIndex);
+      } else if (e.key === 'Escape') {
+        closeLightboxHandler();
+      }
+    }
   });
 
   // Close lightbox when clicking the close button or outside the image
@@ -228,11 +315,14 @@ const hobbies = [
     if (lightbox && lightboxImage) {
       lightbox.classList.remove('opacity-100');
       lightboxImage.classList.add('scale-95');
+      
       // Wait for animation to complete
       setTimeout(() => {
         lightbox.classList.remove('flex');
         lightbox.classList.add('hidden');
-        startAutoplay();
+        
+        // Re-enable scrolling on body
+        document.body.style.overflow = 'auto';
       }, 300);
     }
   }
