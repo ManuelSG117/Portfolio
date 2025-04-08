@@ -13,6 +13,11 @@ const navItems = [
     label: "proyectos",
     url: "/#proyectos",
   },
+  // {
+  //   title: "Habilidades",
+  //   label: "habilidades",
+  //   url: "/#habilidades",
+  // },
   {
     title: "Sobre mí",
     label: "sobre-mi",
@@ -21,7 +26,7 @@ const navItems = [
   {
     title: "Contacto",
     label: "contacto",
-    url: "https://wa.me/524525203261?text=Hola%20Manuel,%20vi%20tu%20portafolio%20y%20me%20gustaría%20contactarte",
+    url: "",
   },
 ]
 ---
@@ -100,15 +105,15 @@ const navItems = [
   }
 
   nav {
-    @apply dark:bg-gray-800/90 bg-white/50;
+    @apply dark:bg-gray-800/90 bg-white/50 backdrop-blur-sm;
   }
 
   @keyframes nav-shadown {
     0% {
-      @apply dark:bg-gray-800/0 bg-white/0;
+      @apply dark:bg-gray-800/0 bg-white/0 backdrop-blur-none;
     }
     to {
-      @apply shadow-lg ring-1 backdrop-blur ring-white/10;
+      @apply shadow-lg ring-1 backdrop-blur-md ring-white/10 dark:ring-white/10;
     }
   }
 </style>
