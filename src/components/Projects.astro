@@ -409,7 +409,7 @@ const PROJECTS = [
   };
 
   const switchToBentoView = () => {
-    // Show message on mobile
+    // Solo mostrar mensaje cuando el usuario hace clic en el botón en móvil
     if (isMobileDevice()) {
       showMobileMessage();
       return;
@@ -458,7 +458,7 @@ const PROJECTS = [
   };
   
   const switchToListView = () => {
-    // Show message on mobile
+    // Solo mostrar mensaje cuando el usuario hace clic en el botón en móvil
     if (isMobileDevice()) {
       showMobileMessage();
       return;
@@ -555,7 +555,44 @@ const PROJECTS = [
     if (savedViewPreference === 'list') {
       switchToListView();
     } else {
-      switchToBentoView();
+      // Aplicar vista bento sin mostrar el mensaje modal en carga inicial
+      const projectsContainer = document.getElementById('projects-container');
+      const bentoViewBtn = document.getElementById('bento-view');
+      const listViewBtn = document.getElementById('list-view');
+      
+      // Update container classes
+      projectsContainer?.classList.remove('list-view');
+      projectsContainer?.classList.add('grid-cols-1', 'md:grid-cols-4', 'auto-rows-[18rem]');
+      projectsContainer?.classList.remove('md:grid-cols-1', 'auto-rows-auto', 'gap-8');
+      
+      // Update active button styles
+      bentoViewBtn?.classList.add('bg-white', 'dark:bg-gray-700', 'text-yellow-500', 'shadow-sm');
+      bentoViewBtn?.classList.remove('text-gray-500', 'dark:text-gray-400');
+      
+      listViewBtn?.classList.remove('bg-white', 'dark:bg-gray-700', 'text-yellow-500', 'shadow-sm');
+      listViewBtn?.classList.add('text-gray-500', 'dark:text-gray-400');
+      
+      // Reset article classes for bento layout
+      document.querySelectorAll('#projects-container article').forEach((article, index) => {
+        const articleEl = article as HTMLElement;
+        
+        // Remove list-specific classes
+        articleEl.classList.remove('md:h-[20rem]');
+        
+        // Apply bento-specific classes based on index
+        if (index === 0) {
+          articleEl.classList.add('md:col-span-2', 'md:row-span-2');
+        } else if (index === 1 || index === 2) {
+          articleEl.classList.add('md:col-span-2', 'md:row-span-1');
+        } else if (index === 3 || index === 5) {
+          articleEl.classList.add('md:col-span-1', 'md:row-span-1');
+        } else if (index === 4) {
+          articleEl.classList.add('md:col-span-2', 'md:row-span-1');
+        }
+      });
+      
+      // Update tags visibility
+      updateTagsVisibility(false);
     }
   });
 </script>

@@ -104,8 +104,18 @@ const THEMES = ["Light", "Dark", "System"]
 
   document.getElementById("theme-toggle-btn").addEventListener("click", (e) => {
     e.stopPropagation()
+    
+    // Close language menu if it's open
+    const languagesMenu = document.getElementById("languages-menu")
+    if (languagesMenu && languagesMenu.classList.contains("open")) {
+      languagesMenu.classList.remove("open")
+    }
+    
     const isClosed = !themesMenu.classList.contains("open")
     themesMenu.classList[isClosed ? "add" : "remove"]("open")
+    
+    // Dispatch event to notify other components
+    document.dispatchEvent(new CustomEvent('themeMenuToggled'))
   })
 
   document.querySelectorAll(".themes-menu-option").forEach((element) => {
@@ -118,5 +128,12 @@ const THEMES = ["Light", "Dark", "System"]
   document.addEventListener('astro:after-swap', () => {
     updateTheme();
     window.scrollTo({ left: 0, top: 0, behavior: 'instant' });
+  })
+  
+  // Listen for language menu toggle
+  document.addEventListener('languageMenuToggled', () => {
+    if (themesMenu && themesMenu.classList.contains("open")) {
+      themesMenu.classList.remove("open")
+    }
   })
 </script>
