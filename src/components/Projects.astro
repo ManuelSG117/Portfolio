@@ -7,7 +7,9 @@ import Kotlin from "./icons/Kotlin.astro";
 import API from "./icons/API.astro";
 import MySQL from "./icons/MySQL.astro";
 import ProjectModal from "./ProjectModal.astro";
-
+import JavaScript from "./icons/JavaScript.astro";
+import Bootstrap from "./icons/Bootstrap.astro";
+import Swift from "./icons/Swift.astro";
 // Add view toggle icons
 import GridIcon from "./icons/Grid.astro";
 import ListIcon from "./icons/List.astro";
@@ -38,77 +40,93 @@ const TAGS = {
     class: "bg-gradient-to-br from-blue-200 to-blue-300 text-blue-800 border border-blue-300 dark:from-blue-900/80 dark:to-blue-700/80 dark:text-blue-300 dark:border-blue-700",
     icon: MySQL,
   },
+  JAVASCRIPT: {
+    name: "JavaScript",
+    class: "bg-gradient-to-br from-yellow-200 to-yellow-300 text-yellow-800 border border-yellow-300 dark:from-yellow-900/80 dark:to-yellow-700/80 dark:text-yellow-300 dark:border-yellow-700",
+    icon: JavaScript, 
+  },
+  BOOTSTRAP: {
+    name: "Bootstrap",
+    class: "bg-gradient-to-br from-blue-200 to-blue-300 text-blue-800 border border-blue-300 dark:from-blue-900/80 dark:to-blue-700/80 dark:text-blue-300 dark:border-blue-700",
+    icon: Bootstrap, 
+  },
+  SWIFT: {
+    name: "SwiftUI",
+    class: "bg-gradient-to-br from-purple-200 to-purple-300 text-purple-800 border border-purple-300 dark:from-purple-900/80 dark:to-purple-700/80 dark:text-purple-300 dark:border-purple-700",
+    icon: Swift 
+  }
+  
 };
 
 const PROJECTS = [
   {
     title: "CAPASU",
-    subtitle: "Contribuí al desarrollo backend  de la aplicación Capasu, siendo esta la primera aplicación de pagos del servicio de agua del estado de Michoacán, añadiendo ingresos en un 10%, con +1k de descargas.",
+    subtitle: "Aplicación móvil para el pago de servicios de agua del estado de Michoacán con +1k de descargas en Google Play Store",
     description:
-      " Diseño e implementación de API RESTful con PHP para gestión de usuarios" +
-      " Contribuí en la integración de pasarela de pagos segura y sistema de notificaciones en tiempo real" +
-      " Desarrollo de de Webservices para el procesamiento de reportes " +
-      " Apoyo en la implementación de crashlitycs, remote config, analitycs, release monitoring, etc. " +
-      "  Optimización de base de datos para mejorar rendimiento y escalabilidad"+
-      " Contribución en el desarrollo de la UI y UX de la aplicación móvil",
+      "Colabore estrechamente en todo el desarrollo de la primer aplicación de pagos del servicio de agua del estado de Michoacán."+
+      "Contribuí en la integración de pasarela de pagos segura y sistema de notificaciones en tiempo real." +
+      "Diseño e implementación de API RESTful y webservices con PHP para gestion de reportes y usuarios." +
+      "Apoyo en la implementación de crashlitycs, remote config, analitycs, release monitoring, etc. " +
+      "Contribución en el desarrollo de la UI y UX de la aplicación móvil.",
 
     link: "https://play.google.com/store/apps/details?id=com.sistemas.capasupay",
-    image: "/projects/capasu.png",
-    tags: [TAGS.PHP ,TAGS.KOTLIN, TAGS.FIREBASE],
+    image: "/projects/capasu.webp",
+    tags: [TAGS.KOTLIN, TAGS.FIREBASE,TAGS.PHP, TAGS.SQL],
   },
 
   {
     title: "Sistema de reportes de Capasu",
-    subtitle: "Diseñé e implementé  de principio a fin una plataforma web  unificada de atención para los diferentes reportes de la ciudadanía para acelerar la solución del reporte en un 40%  mejorando el tiempo de respuesta y ahorrar costos operativos en un 20%",
+    subtitle: "Plataforma web unificada de atención para los diferentes reportes y seguimiento de reportes de Capasu",
     description:
       "Rediseñe e implemente de principio a fin, el desarrollo de backend y front-end." +
-      "Fuí el principal creador de webservices y Api/REST para gestión reportes para el uso de la aplicación móvil unificandola con el sistema web." +
       "Contribuí a estrategias para  para acelerar la solución del reporte en un 40%  mejorando el tiempo de respuesta y ahorrar costos operativos en un 20%. " +
+      "Fuí el principal creador de webservices y Api/REST para gestión reportes para el uso de la aplicación móvil unificandola con el sistema web." +
       "Lídere el rediseño de reportes para el atlas de riesgo del municipio logrando con el equipo operativo mapear los reportes del ultimo año." ,
     link: "https://www.canva.com/design/DAGfAHwmWwg/Oe3Iv36WUCoo6DpGMgJF4w/edit",
-    image: "/projects/Comercial.png",
-    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL],
+    image: "/projects/reportes.webp",
+    tags: [TAGS.PHP, TAGS.JAVASCRIPT, TAGS.SQL, TAGS.BOOTSTRAP],
   },
   {
-    title: "App Servicio Medido",
+    title: "Sistema de Lecturas de Capasu",
+    subtitle:"Plataforma web de mapeo de lecturas, toma de datos y control de lecturistas de Capasu",
+    description:
+      "Fuí el responsable del diseño, desarollo y analisis del sistema web, diseño de base de datos y experiencia de usuario." +
+      "Lideré el desarrollo de estrategias para reducir tiempo en la toma de datos en un 15%." +
+      "Desarrolle en la integración de mapas para la visualización de los medidores y su ubicación." ,
+    image: "/projects/lecturas.png",
+    tags: [TAGS.PHP,TAGS.JAVASCRIPT ,TAGS.SQL, TAGS.BOOTSTRAP],
+  },
+  {
+    title: "App Servicio Medido de Capasu",
     subtitile: "Aplicación móvil para gestión procesos de servicios operativos de Capasu",
     description:
-      " Lideré la construcción un webservices para gestión de lecturas, reportes y servicios." +
+      "Lideré la construcción de webservices para gestión de lecturas, servicios y reportes." +
       "Fuí el responsable de tomar estrategias para reducir errores de toma de datos y tiempos de entrega en más de un 40%." +
-      " Diseñé la base de datos optimizada para grandes volúmenes de datos operativos." +
-      " XML y JSON para la comunicación entre dispositivos y servidores." ,
+      "Diseñé la base de datos optimizada para grandes volúmenes de datos operativos.",
     link: "https://www.canva.com/design/DAGfAHwmWwg/Oe3Iv36WUCoo6DpGMgJF4w/edit",
     image: "/projects/Comercial.png",
-    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL],
+    tags: [ TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL, TAGS.PHP],
   },
   {
     title: "Flota Capasu",
     subtitle: "Sistema web para gestión de flota vehicular de Capasu",
     description:
     "Fuí responsable del diseño, desarollo y analisis del sistema web, diseño de base de datos y experiencia de usuario." +
-    " Desarrolle reportes los cuales ayudaron al encargado de las flotas a reducir costos operativos en al menos un 10%. " ,      
-    image: "/projects/Comercial.png",
-    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL],
+    "Desarrolle reportes los cuales ayudaron al encargado de las flotas a reducir costos operativos en al menos un 10%. " +
+    "Desarrolle notificaciones para mejorar el monitoreo de la flota de vehículos, cuando estos salen de una geozona definida.",      
+    image: "/projects/gps.webp",
+    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL, TAGS.BOOTSTRAP],
   },
+
   {
-    title: "Sistema de Lecturas de Capasu",
-    subtitle:"Sistema de Mapeo de lecturas, toma de datos y control de lecturistas",
-    description:
-      "Fuí el responsable del diseño, desarollo y analisis del sistema web, diseño de base de datos y experiencia de usuario." +
-      "Lideré el desarrollo de estrategias para reducir tiempo en la toma de datos en un 15%.  " +
-      "Desarrolle en la integración de mapas para la visualización de los medidores y su ubicación." ,
-    image: "/projects/Comercial.png",
-    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL],
-  },
-  {
-    title: "Ingresos Capasu",
+    title: "App Ingresos Capasu",
     subtitle: "Aplicación para visualización de ingresos de Capasu",
     description:
     "Colabore en el desarrollo de Webservices para la integración de datos de ingresos." +
     "Participe en el desarrollo de la ui y ux de la aplicación." +
     "Aporte en la creación del paquete de la aplicación en AppleDeveloper." ,
-    image: "/projects/Comercial.png",
-    tags: [TAGS.PHP, TAGS.KOTLIN, TAGS.FIREBASE, TAGS.SQL],
+    image: "/projects/ingresos.webp",
+    tags: [ TAGS.SWIFT, TAGS.SQL],
   }
 
 ];
@@ -249,16 +267,20 @@ const PROJECTS = [
               {title}
             </h3>
 
+            {/* <h5 class=" text-gray 500 dark:text-white/80 break-words">
+              {subtitle}
+            </h5> */}
+
             <div class="space-y-4">
-              {description.split("•").map((item) => {
+              {description.split(/\.(?=\s*[A-Z])/).map((item) => {
                 if (!item.trim()) return null;
                 return (
                   <div class="flex items-start gap-3">
                     <span class="flex-shrink-0 p-1 bg-yellow-500/10 rounded-full mt-1">
                       <div class="w-2 h-2 rounded-full bg-yellow-500/80" />
                     </span>
-                    <p class="text-sm  text-gray-500 dark:text-gray-300">
-                      {item.trim()}
+                    <p class="text-sm text-gray-500 dark:text-gray-300">
+                      {item.trim() + (item.trim().endsWith('.') ? '' : '.')}
                     </p>
                   </div>
                 );
@@ -266,16 +288,12 @@ const PROJECTS = [
             </div>
                {/* Image container with gradient overlay */}
                <div class="relative rounded-xl overflow-hidden group">
-              <div class="absolute inset-0 bg-gradient-to-b 
-                from-transparent via-black/20 to-black/60 
-                group-hover:via-black/40 group-hover:to-black/80
-                transition-colors duration-500 z-10"/>
+              <div class="absolute inset-0 duration-500 z-10"/>
               <img
                 src={image}
                 alt={title}
                 class="w-full h-64 object-cover
                   scale-100 group-hover:scale-110
-                  opacity-100 group-hover:opacity-90
                   transition-all duration-700 ease-out"
               />
             </div>
