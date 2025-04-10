@@ -11,6 +11,8 @@ import SectionContainer from "@/components/SectionContainer.astro"
 import Hero from "@/components/Hero.astro"
 import TitleSection from "@/components/TitleSection.astro"
 import Skills from "@/components/Skills.astro"
+import Contact from "@/components/Contact.astro"
+import ContactIcon from "@/components/icons/Contact.astro"
 ---
 
 <Layout
@@ -56,7 +58,13 @@ import Skills from "@/components/Skills.astro"
       <AboutMe />
     </SectionContainer>
     
- 
+    <SectionContainer id="contacto">
+      <TitleSection>
+        <ContactIcon class="size-8" />
+        Contacto
+      </TitleSection>
+      <Contact />
+    </SectionContainer>
 
   </div>
   </main>
