@@ -406,12 +406,12 @@ const PROJECTS = [
       const allTags = tagsContainer.querySelectorAll('.tag');
       const plusTag = tagsContainer.querySelector('.plus-tag');
       
-      if (isListView) {
-        // Show all tags in list view
+      if (isListView || isMobileDevice()) {
+        // Show all tags in list view or on mobile devices
         allTags.forEach(tag => tag.classList.remove('hidden'));
         if (plusTag) plusTag.classList.add('hidden');
       } else {
-        // In bento view, limit tags for small cards
+        // In bento view on desktop, limit tags for small cards
         if (index === 3 || index === 5) {
           // For small cards, show only first tag
           Array.from(allTags).slice(1).forEach(tag => tag.classList.add('hidden'));
@@ -420,6 +420,23 @@ const PROJECTS = [
           // For larger cards, show all tags
           allTags.forEach(tag => tag.classList.remove('hidden'));
           if (plusTag) plusTag.classList.add('hidden');
+        }
+      }
+      
+      // Add mobile tap indicator
+      const mobileIndicator = article.querySelector('.mobile-tap-indicator');
+      if (isMobileDevice()) {
+        if (!mobileIndicator) {
+          const indicator = document.createElement('div');
+          indicator.className = 'mobile-tap-indicator absolute bottom-3 right-3 w-6 h-6 rounded-full bg-yellow-500/30 flex items-center justify-center animate-pulse z-30';
+          indicator.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>`;
+          article.appendChild(indicator);
+        }
+      } else {
+        if (mobileIndicator) {
+          mobileIndicator.remove();
         }
       }
     });
