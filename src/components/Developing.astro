@@ -1,5 +1,5 @@
 ---
-import React from "./icons/React.astro";
+import Nextjs from "./icons/Nextjs.astro";
 import Firebase from "./icons/Firebase.astro";
 import JavaScript from "./icons/JavaScript.astro";
 import GoogleMaps from "./icons/GoogleMaps.astro";
@@ -7,10 +7,10 @@ import Link from "./icons/Link.astro";
 import ProjectModal from "./ProjectModal.astro";
 
 const TAGS = {
-  REACT: {
-    name: "React",
-    class: "bg-gradient-to-br from-blue-200 to-blue-300 text-blue-800 border border-blue-300 dark:from-blue-900/80 dark:to-blue-700/80 dark:text-blue-300 dark:border-blue-700",
-    icon: React,
+  NEXTJS: {
+    name: "Next.js",
+    class: "bg-gradient-to-br from-gray-200 to-gray-400 text-gray-800 border border-gray-300 dark:from-gray-900/80 dark:to-gray-700/80 dark:text-gray-300 dark:border-gray-700",
+    icon: Nextjs,
   },
   FIREBASE: {
     name: "Firebase",
@@ -39,7 +39,8 @@ const PERSONAL_PROJECTS = [
       "Diseño de interfaz intuitiva para crear perfiles de usuario y reportar incidentes con evidencia multimedia." +
       "Integración de sistema de Maps para precisar ubicaciones de incidentes en tiempo real.",
     image: "/projects/seguro.webp",
-    tags: [TAGS.REACT, TAGS.FIREBASE, TAGS.JAVASCRIPT, TAGS.MAPS],
+    tags: [TAGS.NEXTJS, TAGS.FIREBASE, TAGS.JAVASCRIPT, TAGS.MAPS],
+    link: null,
   },
 ];
 ---
